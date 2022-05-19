@@ -13,6 +13,7 @@ public class Cliente implements Serializable{
     private int ID, edad, idVendedor, zipcode, plazo;
     private double monto;
 
+
     public Cliente(String nombre, String apellido, String direccion, String telefono, String correo, String ciudad, String pais, int ID, int edad, int idVendedor, int zipcode, int plazo, double monto) {
         this.nombre = nombre;
         this.apellido = apellido;
