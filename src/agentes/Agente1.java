@@ -7,6 +7,8 @@ package agentes;
 
 import agentesc.Contenedor;
 import contenidoSerializado.Cliente;
+import contenidoSerializado.Pagos;
+import contenidoSerializado.PagosVentas;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
@@ -15,8 +17,9 @@ public class Agente1 extends Agent{
     @Override
     protected void setup(){
         addBehaviour(new Comportamiento());
+
     }
-    
+
     @Override
     protected void takeDown(){
         Contenedor c = (Contenedor)getArguments()[0];
@@ -29,13 +32,14 @@ public class Agente1 extends Agent{
         boolean terminado=true;
         @Override
         public void action() {
-            System.out.println(getName());
+            //System.out.println(getName());
             //terminado=true;
             //Mensajes.enviar(ACLMessage.INFORM, "BuscarDatos", "56", "COD0102", getAgent());
-            Cliente c1iente = new Cliente("Henry","Paz","Ladron de Guevara", "099999999", "henry.paz@epn.edu.ec", "Quito"
+
+            Cliente cliente = new Cliente("Alex","Paz","Ladron de Guevara", "099999999", "henry.paz@epn.edu.ec", "Quito"
             , "Ecuador", 1, 2, 170170, 15, 5000, 25);
             
-            Mensajes.enviarS(ACLMessage.INFORM, "UnirInfo", c1iente, "COD0102", getAgent());
+            Mensajes.enviarS(ACLMessage.INFORM, "UnirInfo", cliente, "COD0102", getAgent());
             ACLMessage msj = blockingReceive();
             System.out.println(msj.getContent());
             //doDelete();
@@ -44,6 +48,5 @@ public class Agente1 extends Agent{
         public boolean done() {
             return terminado;
         }
-
     }
 }

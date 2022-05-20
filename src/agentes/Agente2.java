@@ -16,49 +16,55 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Agente2 extends Agent{
+
     private String h[]={"",""};
+
     @Override
     protected void setup(){
         addBehaviour(new Comportamiento());
     }
+
     class Comportamiento extends CyclicBehaviour{
+        int recEnv=0;
+        String cont[]= new String[2];
+
         @Override
         public void action() {
-                System.out.println(getName());
-                ACLMessage msj = blockingReceive();
-                String idC = msj.getConversationId();
-                if(idC.equalsIgnoreCase("COD0102")){
+            //System.out.println(getName());
+            ACLMessage msj = blockingReceive();
+            String idC = msj.getConversationId();
+            if(idC.equalsIgnoreCase("COD0102")){
                 try {
-                    Cliente cliente = (Cliente)msj.getContentObject();
+                    Cliente cliente = (Cliente) msj.getContentObject();
                     System.out.println(cliente);
-                    } catch (UnreadableException ex) {
-                Logger.getLogger(Agente2.class.getName()).log(Level.SEVERE, null, ex);
+
+                    //guardar en un arreglo el cliente
+                    recEnv=1;
+                    cont[0]="Datos del Cliente";
+                } catch (UnreadableException ex) {
+                    Logger.getLogger(Agente2.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-                }
-                if(idC.equalsIgnoreCase("COD0302")){
-                    try{
-                        Object[] pagosVentas = (Object[])msj.getContentObject();
-                        System.out.println(pagosVentas.length);
-                        Pagos pago = (Pagos)pagosVentas[0];
-                        Ventas venta = (Ventas)pagosVentas[1];
-                        System.out.println(venta);
-                        System.out.println(pago);
-                    }catch (UnreadableException ex) {
-                        Logger.getLogger(Agente2.class.getName()).log(Level.SEVERE, null, ex);
+            else if(idC.equalsIgnoreCase("COD0302")){
+                try{
+                    Object[] pagosVentas = (Object[])msj.getContentObject();
+                    //System.out.println(pagosVentas.length);
+                    Pagos pago = (Pagos)pagosVentas[0];
+                    Ventas venta = (Ventas)pagosVentas[1];
+                    System.out.println(venta);
+                    System.out.println(pago);
+                    if(recEnv==1){
+                        recEnv=2;
+                        cont[1]="";
                     }
-                    /*String humedad = msj.getContent();
-                    if(msj.getContent().equalsIgnoreCase("alta")){
-                        Mensajes.enviar(ACLMessage.INFORM, "Ag3", "Regar", "COD0302", getAgent());
-                    }else{
-                        Mensajes.enviar(ACLMessage.INFORM, "Ag3", "No regar", "COD0302", getAgent());
-                    }
-                    if(h[1]=="") h[1]=humedad;
+                }catch (UnreadableException ex) {
+                    Logger.getLogger(Agente2.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                if(h[0]!="" & h[1]!=""){
-                    Mensajes.enviar(ACLMessage.INFORM, "Ag4", "Temperatura: "+h[0]+" Humedad: "+h[1], "COD0402", getAgent());
-                    //h[0]=h[1]="";
-*/
-                }
+            }
+            /*else if(recEnv==2){
+                //Mensajes.enviar(ACLMessage.INFORM, "Ag4", "REVISAR PH", "COD0204", getAgent());
+                recEnv=0;
+            }*/
         }
     }
 }

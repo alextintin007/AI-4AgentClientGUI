@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 public class Mensajes {
     public static void enviar(int tipo, String receptor, String contenidoMSJ, String codigoConversacion, Agent emisor){
         ACLMessage acl = new ACLMessage(tipo);

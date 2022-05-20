@@ -1,18 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package contenidoSerializado;
 
 import agentes.Agente1;
-
 import java.io.Serializable;
+
 public class Cliente implements Serializable{
     private String nombre, apellido, direccion, telefono, correo, ciudad, pais;
     private int ID, edad, idVendedor, zipcode, plazo;
     private double monto;
-
 
     public Cliente(String nombre, String apellido, String direccion, String telefono, String correo, String ciudad, String pais, int ID, int edad, int idVendedor, int zipcode, int plazo, double monto) {
         this.nombre = nombre;
@@ -29,8 +23,6 @@ public class Cliente implements Serializable{
         this.plazo = plazo;
         this.monto = monto;
     }
-
-
 
     public String getNombre() {
         return nombre;
@@ -138,7 +130,7 @@ public class Cliente implements Serializable{
 
     @Override
     public String toString() {
-        return "Cliente: ID: "+ID+" "+nombre+" "+apellido;
+        return "Cliente: \nID: "+ID+"\tNombre: "+nombre+" "+apellido;
     }
 
 }

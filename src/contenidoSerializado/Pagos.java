@@ -6,6 +6,7 @@
 package contenidoSerializado;
 
 import java.io.Serializable;
+
 public class Pagos implements Serializable{
     private int idPago, idCliente;
     private double valorPago;
@@ -18,7 +19,7 @@ public class Pagos implements Serializable{
         this.fecha = fecha;
     }
 
-    public Pagos() {}
+    public Pagos() { }
 
     public int getIdPago() {
         return idPago;
@@ -54,6 +55,6 @@ public class Pagos implements Serializable{
 
     @Override
     public String toString() {
-        return "Pagos{" + "idPago=" + idPago + ", idCliente=" + idCliente + ", valorPago=" + valorPago + ", fecha=" + fecha + '}';
+        return "Pagos{" + "IdPago=" + idPago + ", idCliente=" + idCliente + ", valorPago=" + valorPago + ", fecha=" + fecha + '}';
     }
 }

@@ -5,17 +5,25 @@
  */
 package agentes;
 
+import GUI.MainFrame;
 import agentesc.Contenedor;
+import com.sun.java.accessibility.util.GUIInitializedListener;
 import contenidoSerializado.Pagos;
+import contenidoSerializado.PagosVentas;
 import contenidoSerializado.Ventas;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
+
 public class Agente3 extends Agent{
     @Override
     protected void setup(){
         addBehaviour(new Comportamiento());
     }
+
+    //global variables
+    int pSUM = 0;
+
     
     @Override
     protected void takeDown(){
@@ -27,14 +35,21 @@ public class Agente3 extends Agent{
     }
     class Comportamiento extends Behaviour{
         boolean terminado=true;
+
         @Override
         public void action() {
-            System.out.println(getName());
+            //System.out.println(getName());
             //terminado=true;
-            Object[] pagosVentas = new Object[]{new Pagos(1,1,100,"2022-10-10"), new Ventas(1,1,100,true,"2022-10-10", "Aguacates")};
+            //Ventas[]  = new Ventas()[]{};
+
+            //PagosVentas pv = new PagosVentas[][];
+
+            Object[] pagosVentas = new Object[]{
+                    new Pagos(1,1,100,"2022-10-10"),
+                    new Ventas(1, 1,100,true,"2022-10-10", "Aguacates")};
             Mensajes.enviarS(ACLMessage.INFORM, "UnirInfo", pagosVentas, "COD0302", getAgent());
             ACLMessage msj = blockingReceive();
-            System.out.println(msj.getContent());
+            //System.out.println(msj.getContent());
             //doDelete();
         }
         @Override

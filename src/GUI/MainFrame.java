@@ -8,7 +8,8 @@ import contenidoSerializado.Ventas;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import jade.gui.GuiAgent;
+import jade.gui.GuiEvent;
 
 public class MainFrame extends JFrame {
     private JPanel mainPanel;
@@ -33,11 +34,11 @@ public class MainFrame extends JFrame {
     //variables globales
     int contVentas=1;
     int contPagos=1;
-    ArrayList<Ventas> venta1 = new ArrayList<>();
-    ArrayList<Cliente> cliente1 = new ArrayList<>();
+    public final int SENT_TYPE = 0;
+    private GuiAgent owner;
 
     public MainFrame(){
-        new Contenedor().contenedor();
+
         setContentPane(mainPanel);
         setTitle("Deber 1");
         setSize(600,700);
@@ -46,7 +47,6 @@ public class MainFrame extends JFrame {
 
         Cliente cliente = new Cliente("Xavier", "Tintin", "Don Bosco", "0999345241", "xavier.tintin@epn.edu.ec",
                 "Cuenca", "Ecuador", 1, 22, 2, 999, 36, 500);
-        cliente1.add(cliente);
 
         btnIngresarPagos.addActionListener(new ActionListener() {
             @Override
@@ -63,7 +63,7 @@ public class MainFrame extends JFrame {
                 }
                 Ventas ventas = new Ventas(contVentas, 1, Double.parseDouble(txtValorVentas.getText()), rbnSelection,
                         txtFechaVentas.getText(), txtDescripVentas.getText());
-                venta1.add(ventas);
+
                 contVentas++;
             }
         });
@@ -71,8 +71,7 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Pagos pagos = new Pagos(contPagos, 1, Double.parseDouble(txtValorPagos.getText()),txtFechaPagos.getText());
-                PagosVentas pagosVentas = new PagosVentas();
-                contVentas++;
+                contPagos++;
             }
         });
         calcularButton.addActionListener(new ActionListener() {
@@ -84,6 +83,7 @@ public class MainFrame extends JFrame {
     }
 
     public static void main(String[] arg){
-        MainFrame myframe = new MainFrame();
+        //MainFrame myframe = new MainFrame();
+        new Contenedor().contenedor();
     }
 }

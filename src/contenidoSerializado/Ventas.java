@@ -1,10 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package contenidoSerializado;
-import GUI.MainFrame;
+
 import java.io.Serializable;
 
 public class Ventas implements Serializable {
@@ -13,8 +8,7 @@ public class Ventas implements Serializable {
     private boolean isIva;//1.12
     private String fecha, descripcionProducto;
 
-    public Ventas(int idVenta, int idCliente, double valor, boolean isIva,
-                  String fecha, String descripcionProducto) {
+    public Ventas(int idVenta, int idCliente, double valor, boolean isIva, String fecha, String descripcionProducto) {
         this.idVenta = idVenta;
         this.idCliente = idCliente;
         this.valor = valor;
@@ -75,6 +69,6 @@ public class Ventas implements Serializable {
 
     @Override
     public String toString() {
-        return "Ventas{" + "idVenta=" + idVenta + ", idCliente=" + idCliente + ", valor=" + valor + ", isIva=" + isIva + ", fecha=" + fecha + ", descripcionProducto=" + descripcionProducto + '}';
+        return "Ventas{" + "IdVenta=" + idVenta + ", idCliente=" + idCliente + ", valor=" + valor + ", isIva=" + isIva + ", fecha=" + fecha + ", descripcionProducto=" + descripcionProducto + '}';
     }
 }
