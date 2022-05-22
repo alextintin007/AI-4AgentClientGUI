@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package agentes;
 
-import GUI.MainFrame;
 import agentesc.Contenedor;
-import com.sun.java.accessibility.util.GUIInitializedListener;
 import contenidoSerializado.Pagos;
-import contenidoSerializado.PagosVentas;
 import contenidoSerializado.Ventas;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
@@ -23,7 +15,6 @@ public class Agente3 extends Agent{
 
     //global variables
     int pSUM = 0;
-
     
     @Override
     protected void takeDown(){

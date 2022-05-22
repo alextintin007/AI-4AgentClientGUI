@@ -8,7 +8,6 @@ import contenidoSerializado.Ventas;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import jade.gui.GuiAgent;
 
 public class MainFrame extends JFrame {
     private JPanel mainPanel;
@@ -30,8 +29,22 @@ public class MainFrame extends JFrame {
     private JLabel lblidPagos;
     private JTextField txtDescripVentas;
     private JTextField txtDireccionCliente;
-    private JTextField textField2;
+    private JTextField txtTelefonoCliente;
     private JTextField txtNombreCliente;
+    private JTextField txtEdadCliente;
+    private JTextField txtMontoCliente;
+    private JTextField txtApellidoCliente;
+    private JTextField txtPlazoCliente;
+    private JTextField txtEmailCliente;
+    private JTextField txtIDCliente;
+    private JTextField txtVendedorCliente;
+    private JTextField txtCiudadCliente;
+    private JTextField txtPaisCliente;
+    private JTextField txtZipCliente;
+    private JPanel panelPagos;
+    private JPanel panelVentas;
+    private JPanel panelCliente;
+    private JPanel panelMensaje;
 
     //variables globales
     int contVentas=1;

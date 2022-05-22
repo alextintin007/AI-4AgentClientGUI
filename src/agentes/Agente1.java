@@ -3,12 +3,9 @@ package agentes;
 import GUI.MainFrame;
 import agentesc.Contenedor;
 import contenidoSerializado.Cliente;
-import contenidoSerializado.Pagos;
-import contenidoSerializado.PagosVentas;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
-
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;

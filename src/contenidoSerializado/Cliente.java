@@ -1,6 +1,5 @@
 package contenidoSerializado;
 
-import agentes.Agente1;
 import java.io.Serializable;
 
 public class Cliente implements Serializable{
@@ -132,5 +131,4 @@ public class Cliente implements Serializable{
     public String toString() {
         return "Cliente: \nID: "+ID+"\tNombre: "+nombre+" "+apellido;
     }
-
 }
