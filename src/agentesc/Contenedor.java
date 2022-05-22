@@ -1,30 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package agentesc;
 
-import agentes.Agente1;
-import agentes.Agente2;
-import agentes.Agente3;
+import agentes.*;
 import contenidoSerializado.Cliente;
 import contenidoSerializado.PagosVentas;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.StaleProxyException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Contenedor {
+
     AgentContainer agentContainer;
+
     private PagosVentas[] pagosVentas;
     private Cliente[] clientes;
 
     public Contenedor(PagosVentas[] pagosVentas, Cliente[] clientes) {
         this.pagosVentas=pagosVentas;
         this.clientes=clientes;
+    }
+
+    public PagosVentas[] getPagosVentas() {
+        return pagosVentas;
+    }
+
+    @Override
+    public String toString() {
+        return "Contenedor{" +
+                "pagosVentas=" + Arrays.toString(pagosVentas) +
+                '}';
+    }
+
+    public void setPagosVentas(PagosVentas[] pagosVentas) {
+        this.pagosVentas = pagosVentas;
+    }
+
+    public Cliente[] getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(Cliente[] clientes) {
+        this.clientes = clientes;
     }
 
     public void contenedor(){

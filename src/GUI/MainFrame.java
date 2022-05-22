@@ -8,7 +8,6 @@ import contenidoSerializado.Ventas;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import jade.gui.GuiAgent;
 
 public class MainFrame extends JFrame {
     private JPanel mainPanel;
@@ -30,13 +29,26 @@ public class MainFrame extends JFrame {
     private JLabel lblidPagos;
     private JTextField txtDescripVentas;
     private JTextField txtDireccionCliente;
-    private JTextField textField2;
+    private JTextField txtTelefonoCliente;
     private JTextField txtNombreCliente;
+    private JTextField txtEdadCliente;
+    private JTextField txtMontoCliente;
+    private JTextField txtApellidoCliente;
+    private JTextField txtPlazoCliente;
+    private JTextField txtEmailCliente;
+    private JTextField txtIDCliente;
+    private JTextField txtVendedorCliente;
+    private JTextField txtCiudadCliente;
+    private JTextField txtPaisCliente;
+    private JTextField txtZipCliente;
+    private JPanel panelPagos;
+    private JPanel panelVentas;
+    private JPanel panelCliente;
+    private JPanel panelMensaje;
 
     //variables globales
     int contVentas=1;
     int contPagos=1;
-    int contCliente=1;
     Pagos[] pagos = new Pagos[30];
     Ventas[] ventas = new Ventas[30];
     Cliente[] cliente = new Cliente[1];
@@ -53,33 +65,32 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean rbnSelection=true;
-                if (rbnNo.isSelected()==true){
+                if (rbnNo.isSelected()){
                     rbnSelection=false;
                 }
-                ventas[contVentas] = new Ventas(contVentas, 1, Double.parseDouble(txtValorVentas.getText()), rbnSelection,
-                        txtFechaVentas.getText(), txtDescripVentas.getText());
+                //ventas[contVentas] = new Ventas(contVentas, 1, Double.parseDouble(txtValorVentas.getText()), rbnSelection, txtFechaVentas.getText(), txtDescripVentas.getText());
+                ventas[contVentas] = new Ventas(1, 1,100,true,"2022-10-10", "Aguacates");
+
                 contVentas++;
             }
         });
         btnIngresarPagos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pagos[contPagos] = new Pagos(contPagos, 1, Double.parseDouble(txtValorPagos.getText()),txtFechaPagos.getText());
+                //pagos[contPagos] = new Pagos(contPagos, 1, Double.parseDouble(txtValorPagos.getText()),txtFechaPagos.getText());
+                pagos[contPagos] = new Pagos(1,1,100,"2022-10-10");
                 contPagos++;
             }
         });
         calcularButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cliente[contCliente] =  new Cliente("Xavier", "Tintin", "Don Bosco", "0999345241", "xavier.tintin@epn.edu.ec",
-                        "Cuenca", "Ecuador", 1, 22, 2, 999, 36, 500);
-                contCliente++;
+                cliente[0] =  new Cliente("Xavier", "Tintin", "Don Bosco", "0999345241", "xavier.tintin@epn.edu.ec", "Cuenca", "Ecuador", 1, 22, 2, 999, 36, 500);
 
                 PagosVentas pv = new PagosVentas(pagos,ventas);
 
                 pv1[0]=pv;
                 new Contenedor(pv1,cliente).contenedor();
-
             }
         });
     }

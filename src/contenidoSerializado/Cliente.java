@@ -1,10 +1,9 @@
 package contenidoSerializado;
 
-import agentes.Agente1;
 import java.io.Serializable;
 
 public class Cliente implements Serializable{
-    private String nombre, apellido, direccion, telefono, correo, ciudad, pais;
+    public String nombre, apellido, direccion, telefono, correo, ciudad, pais;
     private int ID, edad, idVendedor, zipcode, plazo;
     private double monto;
 
@@ -132,5 +131,4 @@ public class Cliente implements Serializable{
     public String toString() {
         return "Cliente: \nID: "+ID+"\tNombre: "+nombre+" "+apellido;
     }
-
 }

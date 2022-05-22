@@ -1,6 +1,7 @@
 package contenidoSerializado;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class PagosVentas implements Serializable {
     Pagos[] pagos;
@@ -25,5 +26,13 @@ public class PagosVentas implements Serializable {
 
     public void setVentas(Ventas[] ventas) {
         this.ventas = ventas;
+    }
+
+    @Override
+    public String toString() {
+        return "PagosVentas{" +
+                "pagos=" + Arrays.toString(pagos) +
+                ", ventas=" + Arrays.toString(ventas) +
+                '}';
     }
 }
