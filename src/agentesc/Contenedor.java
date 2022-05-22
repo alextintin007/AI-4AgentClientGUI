@@ -8,6 +8,8 @@ package agentesc;
 import agentes.Agente1;
 import agentes.Agente2;
 import agentes.Agente3;
+import contenidoSerializado.Cliente;
+import contenidoSerializado.PagosVentas;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.wrapper.AgentContainer;
@@ -17,6 +19,14 @@ import java.util.logging.Logger;
 
 public class Contenedor {
     AgentContainer agentContainer;
+    private PagosVentas[] pagosVentas;
+    private Cliente[] clientes;
+
+    public Contenedor(PagosVentas[] pagosVentas, Cliente[] clientes) {
+        this.pagosVentas=pagosVentas;
+        this.clientes=clientes;
+    }
+
     public void contenedor(){
         jade.core.Runtime runtime = jade.core.Runtime.instance();
         Profile P = new ProfileImpl(null, 1099, null);
