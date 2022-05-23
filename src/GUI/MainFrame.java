@@ -7,7 +7,6 @@ import contenidoSerializado.Cliente;
 import contenidoSerializado.Pagos;
 import contenidoSerializado.PagosVentas;
 import contenidoSerializado.Ventas;
-
 import java.util.concurrent.Semaphore;
 import javax.swing.JButton;
 
@@ -53,11 +52,9 @@ public class MainFrame extends JFrame {
     public JButton getBtnIngresarPagos() {
         return btnIngresarPagos;
     }
-
     public JButton getBtnIngresarVentas() {
         return btnIngresarVentas;
     }
-
     public JButton getBtnCliente() {
         return btnCliente;
     }
@@ -75,6 +72,7 @@ public class MainFrame extends JFrame {
                     Integer.parseInt(txtIDCliente.getText()),Integer.parseInt(txtEdadCliente.getText()),123,
                     Integer.parseInt(txtZipCliente.getText()),Integer.parseInt(txtPlazoCliente.getText()),Double.parseDouble(txtMontoCliente.getText()));
             JOptionPane.showMessageDialog(rootPane, "Client Button");
+            //?
             botonC=true;
             semaphore.release();
         }
@@ -110,7 +108,7 @@ public class MainFrame extends JFrame {
     private PagosVentas pyg;
     private PagosVentas[] pagosVentas= new PagosVentas[30];
 
-    //
+    //?
     Semaphore semaphore;
 
     //getters and setters Cliente, pagosventa

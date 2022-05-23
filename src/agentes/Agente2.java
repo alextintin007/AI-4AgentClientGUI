@@ -1,9 +1,7 @@
 package agentes;
 
 import contenidoSerializado.Cliente;
-import contenidoSerializado.Pagos;
 import contenidoSerializado.PagosVentas;
-import contenidoSerializado.Ventas;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
