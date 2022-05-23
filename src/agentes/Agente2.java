@@ -2,6 +2,7 @@ package agentes;
 
 import contenidoSerializado.Cliente;
 import contenidoSerializado.Pagos;
+import contenidoSerializado.PagosVentas;
 import contenidoSerializado.Ventas;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
@@ -20,19 +21,21 @@ public class Agente2 extends Agent{
     }
 
     class Comportamiento extends CyclicBehaviour{
-        int recEnv=0;
+        private int recEnv=0;
         String cont[]= new String[2];
+        private Cliente[] m1;
+        private PagosVentas[] m2;
 
         @Override
         public void action() {
-            //System.out.println(getName());
             ACLMessage msj = blockingReceive();
             String idC = msj.getConversationId();
             if(idC.equalsIgnoreCase("COD0102")){
                 try {
-                    Cliente cliente = (Cliente) msj.getContentObject();
+                    //Cliente cliente = (Cliente) msj.getContentObject();
+                    Cliente[] cliente = (Cliente[]) msj.getContentObject();
+                    m1=cliente;
                     System.out.println(cliente);
-
                     //guardar en un arreglo el cliente
                     recEnv=1;
                     cont[0]="Datos del Cliente";
@@ -42,12 +45,14 @@ public class Agente2 extends Agent{
             }
             else if(idC.equalsIgnoreCase("COD0302")){
                 try{
-                    Object[] pagosVentas = (Object[])msj.getContentObject();
-                    //System.out.println(pagosVentas.length);
-                    Pagos pago = (Pagos)pagosVentas[0];
-                    Ventas venta = (Ventas)pagosVentas[1];
-                    System.out.println(venta);
-                    System.out.println(pago);
+//                    Object[] pagosVentas = (Object[])msj.getContentObject();
+//                    Pagos pago = (Pagos)pagosVentas[0];
+//                    Ventas venta = (Ventas)pagosVentas[1];
+//                    System.out.println(venta);
+//                    System.out.println(pago);
+                    PagosVentas[] pagoVenta = (PagosVentas[])msj.getContentObject();
+                    m2=pagoVenta;
+
                     if(recEnv==1){
                         recEnv=2;
                         cont[1]="";

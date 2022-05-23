@@ -1,7 +1,9 @@
 package agentes;
 
+import GUI.MainFrame;
 import agentesc.Contenedor;
 import contenidoSerializado.Pagos;
+import contenidoSerializado.PagosVentas;
 import contenidoSerializado.Ventas;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
@@ -13,8 +15,6 @@ public class Agente3 extends Agent{
         addBehaviour(new Comportamiento());
     }
 
-    //global variables
-    int pSUM = 0;
     
     @Override
     protected void takeDown(){
@@ -25,7 +25,7 @@ public class Agente3 extends Agent{
         System.out.println("Morir");
     }
     class Comportamiento extends Behaviour{
-        boolean terminado=true;
+        boolean terminado=false;
 
         @Override
         public void action() {
@@ -34,6 +34,9 @@ public class Agente3 extends Agent{
             //Ventas[]  = new Ventas()[]{};
 
             //PagosVentas pv = new PagosVentas[][];
+            MainFrame t = (MainFrame)getArguments()[0];
+
+
 
             Object[] pagosVentas = new Object[]{
                     new Pagos(1,1,100,"2022-10-10"),

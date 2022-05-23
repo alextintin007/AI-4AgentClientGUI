@@ -12,8 +12,14 @@ public class PagosVentas implements Serializable {
         this.ventas = ventas;
     }
 
+    public PagosVentas() {}
+
     public Pagos[] getPagos() {
         return pagos;
+    }
+
+    public Pagos getPago(int posicion) {
+        return pagos[posicion];
     }
 
     public void setPagos(Pagos[] pagos) {
@@ -24,8 +30,19 @@ public class PagosVentas implements Serializable {
         return ventas;
     }
 
+    public Ventas getVenta(int posicion) {
+        return ventas[posicion];
+    }
+
     public void setVentas(Ventas[] ventas) {
         this.ventas = ventas;
+    }
+
+    public void nuevoPago(int posicion,Pagos pago){
+        this.pagos[posicion]=pago;
+    }
+    public void nuevoVentas(int posicion,Ventas venta){
+        this.ventas[posicion]=venta;
     }
 
     @Override
