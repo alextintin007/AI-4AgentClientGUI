@@ -3,14 +3,14 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import contenidoSerializado.Cliente;
 import contenidoSerializado.Pagos;
 import contenidoSerializado.PagosVentas;
 import contenidoSerializado.Ventas;
-import java.util.concurrent.Semaphore;
 import javax.swing.JButton;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements Serializable {
     private JPanel mainPanel;
     private JButton btnCalcular;
     private JTextField txtidPagos;
@@ -48,154 +48,150 @@ public class MainFrame extends JFrame {
     private JPanel panelMensaje;
     private JButton btnCliente;
 
-    //Getters of buttons
-    public JButton getBtnIngresarPagos() {
-        return btnIngresarPagos;
-    }
-    public JButton getBtnIngresarVentas() {
-        return btnIngresarVentas;
-    }
-    public JButton getBtnCliente() {
-        return btnCliente;
-    }
-    public JButton getCalcularButton() {
-        return btnCalcular;
-    }
-
-    //action listeners for buttons
-    public class BotonClienteListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("Client Button pressed");
-            Cliente cliente=new Cliente(txtNombreCliente.getText(),txtApellidoCliente.getText(),txtDireccionCliente.getText(),
-                    txtTelefonoCliente.getText(),txtEmailCliente.getText(),txtCiudadCliente.getText(),"Ecuador",
-                    Integer.parseInt(txtIDCliente.getText()),Integer.parseInt(txtEdadCliente.getText()),123,
-                    Integer.parseInt(txtZipCliente.getText()),Integer.parseInt(txtPlazoCliente.getText()),Double.parseDouble(txtMontoCliente.getText()));
-            JOptionPane.showMessageDialog(rootPane, "Client Button");
-            //?
-            botonC=true;
-            semaphore.release();
-        }
-    }
-    private class BotonVentaListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("Sales Button pressed");
-            Ventas venta=new Ventas(contVentas, 1, Double.parseDouble(txtValorVentas.getText()), true, txtFechaVentas.getText(), txtDescripVentas.getText());
-            //pasar al agente 3
-            pyg.nuevoVentas(contVentas, venta);
-            contVentas++;
-        }
-    }
-    private class BotonPagoListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("Payment Button pressed");
-            Pagos pago=new Pagos(contPagos, 1, Double.parseDouble(txtValorPagos.getText()), txtFechaPagos.getText());
-            //pasar al agente 3
-            pyg.nuevoPago(contPagos, pago);
-            contPagos++;
-        }
-    }
-
     //variables globales
-    int contVentas=0;
-    int contPagos=0;
-    boolean botonC=false;
+    private boolean botonCliente;
+    private boolean botonPagos;
+    private boolean botonVentas;
+    private boolean botonCalcular;
 
     //Clases globales
-    private Cliente clientes;
-    private PagosVentas pyg;
-    private PagosVentas[] pagosVentas= new PagosVentas[30];
+    private Cliente cliente;
+    private Pagos pago;
+    private Ventas venta;
 
-    //?
-    Semaphore semaphore;
-
-    //getters and setters Cliente, pagosventa
-    public Cliente getClientes() {
-        return clientes;
+    //getters and setters
+    public Cliente getCliente() {
+        return cliente;
     }
-
-    public void setClientes(Cliente clientes) {
-        this.clientes = clientes;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
-
-    public PagosVentas[] getPagosVentas() {
-        return pagosVentas;
+    public Pagos getPago() {
+        return pago;
     }
-
-    public void setPagosVentas(PagosVentas[] pagosVentas) {
-        this.pagosVentas = pagosVentas;
+    public void setPago(Pagos pago) {
+        this.pago = pago;
     }
-
-    public boolean isBotonC() {
-        return botonC;
+    public Ventas getVenta() {
+        return venta;
     }
-
+    public void setVenta(Ventas venta) {
+        this.venta = venta;
+    }
 
     public MainFrame(){
         //Init mainFrame
         setContentPane(mainPanel);
-        setTitle("Deber 1");
+        setTitle("Agentes-GUI");
         setSize(600,700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
         //Set the initial state of the mainframe
-        Cliente primerCliente =  new Cliente("Xavier", "Tintin", "Don Bosco", "0999345241",
-                "xavier.tintin@epn.edu.ec", "Cuenca", "Ecuador", 1, 22, 2, 999,
-                36, 500);
-        Pagos primerPagos = new Pagos(1,1,100,"2022-10-10");
-        Ventas primeraVenta= new Ventas(1, 1,100,true,"2022-10-10", "Aguacates");
-        pyg=new PagosVentas();
-        pyg.nuevoPago(contPagos,primerPagos);
-        pyg.nuevoVentas(contVentas,primeraVenta);
-        pagosVentas[0]=pyg;
+//        Cliente primerCliente =  new Cliente("Xavier", "Tintin", "Don Bosco", "0999345241",
+//                "xavier.tintin@epn.edu.ec", "Cuenca", "Ecuador", 1, 22, 2, 999,
+//                36, 500);
+//        Pagos primerPagos = new Pagos(1,1,100,"2022-10-10");
+//        Ventas primeraVenta= new Ventas(1, 1,100,true,"2022-10-10", "Aguacates");
+ //         pyg=new PagosVentas();
+//        pyg.nuevoPago(contPagos,primerPagos);
+//        pyg.nuevoVentas(contVentas,primeraVenta);
+//        pagosVentas[0]=pyg;
+//
+//
+//        contPagos++;
+//        contVentas++;
 
-        //Set components of the first state to visualize in GUI
-        txaMensaje.setText(primerCliente.toString()+"\n"+
-                pagosVentas[0].getPago(0).toString()+"\n"+
-                pagosVentas[0].getVenta(0).toString());
-        contPagos++;
-        contVentas++;
-
-
+        //Actions Performed by Buttons
         btnIngresarVentas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //el objeto que ya esta creado se pase al agente 3
-                boolean rbnSelection=true;
-                if (rbnNo.isSelected()){
-                    rbnSelection=false;
-                }
-                Ventas venta = new Ventas(contVentas, 1, Double.parseDouble(txtValorVentas.getText()), rbnSelection, txtFechaVentas.getText(), txtDescripVentas.getText());
-                pyg.nuevoVentas(contVentas,venta);
-                contVentas++;
+                System.out.println("\nSales Button pressed");             //se ingresa el numero de ventas que se desee
+//                Ventas venta=new Ventas(contVentas, Integer.parseInt(txtIDCliente.getText()), Double.parseDouble(txtValorVentas.getText()), true, txtFechaVentas.getText(), txtDescripVentas.getText());
+//                boolean rbnSelection=true;
+//                if (rbnNo.isSelected()){
+//                    rbnSelection=false;
+//                }
+                setVenta(new Ventas(1, 1,100,true,"2022-10-10", "Aguacates"));
+                botonVentas = pressBotonVentas();
             }
         });
         btnIngresarPagos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //el objeto que ya esta creado se pase al agente 3
-                Pagos pago = new Pagos(contPagos, 1, Double.parseDouble(txtValorPagos.getText()),txtFechaPagos.getText());
-                pyg.nuevoPago(contPagos,pago);
-                contPagos++;
+                System.out.println("\nPayment Button pressed");           //se ingresan el numero de pagos que se desee
+                //Pagos pago = new Pagos(contPagos, Integer.parseInt(txtIDCliente.getText()), Double.parseDouble(txtValorPagos.getText()),txtFechaPagos.getText());
+                setPago(new Pagos(1,1,100,"2022-10-10"));
+                botonPagos = pressBotonPagos();
             }
         });
         btnCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //se ingresan los datos del cliente una sola vez
-//                cliente[0] =  new Cliente("Xavier", "Tintin", "Don Bosco", "0999345241", "xavier.tintin@epn.edu.ec", "Cuenca", "Ecuador", 1, 22, 2, 999, 36, 500);
-//                PagosVentas pv = new PagosVentas(pagos,ventas);
-//                pv1[0]=pv;
+                System.out.println("\nClient Button pressed");            //se ingresan los datos del cliente una sola vez
+//                Cliente cliente=new Cliente(txtNombreCliente.getText(),txtApellidoCliente.getText(),txtDireccionCliente.getText(),
+//                        txtTelefonoCliente.getText(),txtEmailCliente.getText(),txtCiudadCliente.getText(),"Ecuador",
+//                        Integer.parseInt(txtIDCliente.getText()),Integer.parseInt(txtEdadCliente.getText()),123,
+//                        Integer.parseInt(txtZipCliente.getText()),Integer.parseInt(txtPlazoCliente.getText()),Double.parseDouble(txtMontoCliente.getText()));
+//                JOptionPane.showMessageDialog(rootPane, "Client Button");
+
+                setCliente(new Cliente("Xavier", "Tintin", "Don Bosco", "0999345241",
+                        "xavier.tintin@epn.edu.ec", "Cuenca", "Ecuador", 1, 22, 2, 999,
+                        36, 500));
+                botonCliente = pressBotonCliente();
             }
         });
         btnCalcular.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //llama al agente 4 para que se realicen los calculos
+                //Set components of the first state to visualize in GUI
+                System.out.println("\nCalculate Button Pressed");         //llama al agente 4 para que se realicen los calculos
+                botonCalcular = pressBotonCalcular();
             }
         });
+    }
+
+    //Boton Cliente
+    public boolean isBotonCliente() {
+        return botonCliente;
+    }
+    private boolean pressBotonCliente(){
+        return true;
+    }
+    public void setBotonCliente(boolean botonCliente){
+        this.botonCliente = botonCliente;
+    }
+
+    //Boton Pagos
+    public boolean isBotonPagos(){
+        return botonPagos;
+    }
+    private boolean pressBotonPagos(){
+        return true;
+    }
+    public void setBotonPagos(boolean botonPagos){
+        this.botonPagos = botonPagos;
+    }
+
+    //Boton Ventas
+    public boolean isBotonVentas(){
+        return botonVentas;
+    }
+    private boolean pressBotonVentas(){
+        return true;
+    }
+    public void setBotonVentas(boolean botonVentas){
+        this.botonVentas = botonVentas;
+    }
+
+    //Boton Calcular
+    public boolean isBotonCalcular(){
+        return botonCalcular;
+    }
+    private boolean pressBotonCalcular(){
+        return true;
+    }
+    public void setBotonCalcular(boolean botonVentas){
+        this.botonCalcular = botonCalcular;
     }
 }
