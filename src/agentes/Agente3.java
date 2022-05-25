@@ -2,12 +2,8 @@ package agentes;
 
 import GUI.MainFrame;
 import agentesc.Contenedor;
-import contenidoSerializado.Pagos;
-import contenidoSerializado.PagosVentas;
-import contenidoSerializado.Ventas;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
-import jade.lang.acl.ACLMessage;
 
 public class Agente3 extends Agent{
     @Override
@@ -35,16 +31,25 @@ public class Agente3 extends Agent{
 
             //PagosVentas pv = new PagosVentas[][];
             MainFrame t = (MainFrame)getArguments()[0];
+            t.setVisible(true);
+            //t.getBtnCliente().addActionListener(t.new BotonClienteListener());
+
+            if(t.isBotonCliente()){
+                System.out.println("Mensaje de GUI: "+t.getCliente().toString());
+                //emviar al agente 2 los datos
+                //Mensajes.enviarS(ACLMessage.INFORM, "UnirInfo", t.getClientes(), "COD0102", getAgent());
+                t.setBotonCliente(false);
+            }
 
 
 
-            Object[] pagosVentas = new Object[]{
-                    new Pagos(1,1,100,"2022-10-10"),
-                    new Ventas(1, 1,100,true,"2022-10-10", "Aguacates")};
-            Mensajes.enviarS(ACLMessage.INFORM, "UnirInfo", pagosVentas, "COD0302", getAgent());
-            ACLMessage msj = blockingReceive();
-            //System.out.println(msj.getContent());
-            doDelete();
+//            Object[] pagosVentas = new Object[]{
+//                    new Pagos(1,1,100,"2022-10-10"),
+//                    new Ventas(1, 1,100,true,"2022-10-10", "Aguacates")};
+//            Mensajes.enviarS(ACLMessage.INFORM, "UnirInfo", pagosVentas, "COD0302", getAgent());
+//            ACLMessage msj = blockingReceive();
+//            //System.out.println(msj.getContent());
+//            doDelete();
         }
         @Override
         public boolean done() {
