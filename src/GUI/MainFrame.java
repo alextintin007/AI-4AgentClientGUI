@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.io.Serializable;
 import contenidoSerializado.Cliente;
 import contenidoSerializado.Pagos;
-import contenidoSerializado.PagosVentas;
 import contenidoSerializado.Ventas;
 import javax.swing.JButton;
 
@@ -86,21 +85,6 @@ public class MainFrame extends JFrame implements Serializable {
         setSize(600,700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-
-        //Set the initial state of the mainframe
-//        Cliente primerCliente =  new Cliente("Xavier", "Tintin", "Don Bosco", "0999345241",
-//                "xavier.tintin@epn.edu.ec", "Cuenca", "Ecuador", 1, 22, 2, 999,
-//                36, 500);
-//        Pagos primerPagos = new Pagos(1,1,100,"2022-10-10");
-//        Ventas primeraVenta= new Ventas(1, 1,100,true,"2022-10-10", "Aguacates");
- //         pyg=new PagosVentas();
-//        pyg.nuevoPago(contPagos,primerPagos);
-//        pyg.nuevoVentas(contVentas,primeraVenta);
-//        pagosVentas[0]=pyg;
-//
-//
-//        contPagos++;
-//        contVentas++;
 
         //Actions Performed by Buttons
         btnIngresarVentas.addActionListener(new ActionListener() {
@@ -191,7 +175,7 @@ public class MainFrame extends JFrame implements Serializable {
     private boolean pressBotonCalcular(){
         return true;
     }
-    public void setBotonCalcular(boolean botonVentas){
+    public void setBotonCalcular(boolean botonCalcular){
         this.botonCalcular = botonCalcular;
     }
 }

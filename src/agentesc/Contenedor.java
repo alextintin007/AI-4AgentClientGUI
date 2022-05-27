@@ -24,8 +24,8 @@ public class Contenedor {
             MainFrame mainFrame = new MainFrame();
             agentContainer.createNewAgent("ReceptorPagosVentas", Agente3.class.getName(), new Object[]{mainFrame}).start();
             agentContainer.createNewAgent("ReceptorCliente", Agente1.class.getName(), new Object[]{mainFrame}).start();
-            //agentContainer.createNewAgent("UnirInfo", Agente2.class.getName(), new Object[]{this,1}).start();
-            //agentContainer.createNewAgent("EmisorGUI", Agente4.class.getName(), new Object[]{this,1}).start();
+            agentContainer.createNewAgent("UnirInfo", Agente2.class.getName(), new Object[]{this,1}).start();
+            agentContainer.createNewAgent("EmisorGUI", Agente4.class.getName(), new Object[]{mainFrame}).start();
         } catch(StaleProxyException ex){
             Logger.getLogger(Contenedor.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -1,10 +1,15 @@
 package agentes;
 
 import GUI.MainFrame;
+import contenidoSerializado.Pagos;
+import contenidoSerializado.PagosVentas;
+import contenidoSerializado.Ventas;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
+import jade.lang.acl.ACLMessage;
 
 public class Agente3 extends Agent{
+
     @Override
     protected void setup(){
         addBehaviour(new Comportamiento());
@@ -16,38 +21,32 @@ public class Agente3 extends Agent{
         int contPagos = 0;
         boolean terminado=false;
 
+        PagosVentas pyg = new PagosVentas();
+        Ventas[] ventas = new Ventas[10];
+        Pagos[] pagos = new Pagos[10];
+
         @Override
         public void action() {
-
-            //PagosVentas pv = new PagosVentas[];
             MainFrame t = (MainFrame)getArguments()[0];
             t.setVisible(true);
 
             if(t.isBotonVentas()){
-                System.out.println("Venta: Mensaje de GUI: "+t.getVenta().toString());
-                //enviar al agente 2 los datos
-                System.out.println(contVentas);
+                ventas[contVentas]=t.getVenta();
                 contVentas++;
-                //Mensajes.enviarS(ACLMessage.INFORM, "UnirInfo", t.getClientes(), "COD0102", getAgent());
                 t.setBotonVentas(false);
             }
             if(t.isBotonPagos()){
-                System.out.println("Pago: Mensaje de GUI: "+t.getPago().toString());
-                System.out.println(contPagos);
+                pagos[contPagos]=t.getPago();
                 contPagos++;
                 t.setBotonPagos(false);
             }
-
-
-
-//            Object[] pagosVentas = new Object[]{
-//                    new Pagos(1,1,100,"2022-10-10"),
-//                    new Ventas(1, 1,100,true,"2022-10-10", "Aguacates")};
-//            Mensajes.enviarS(ACLMessage.INFORM, "UnirInfo", pagosVentas, "COD0302", getAgent());
-//            ACLMessage msj = blockingReceive();
-//            //System.out.println(msj.getContent());
-//            doDelete();
+            if(t.isBotonCalcular()){
+                pyg = new PagosVentas(pagos, ventas);
+                Mensajes.enviarS(ACLMessage.INFORM, "UnirInfo", pyg, "COD0302", getAgent());
+                t.setBotonCalcular(false);
+            }
         }
+
         @Override
         public boolean done() {
             return terminado;
