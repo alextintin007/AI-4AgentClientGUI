@@ -52,13 +52,14 @@ public class MainFrame extends JFrame implements Serializable {
     private boolean botonPagos;
     private boolean botonVentas;
     private boolean botonCalcular;
+    private boolean rbnSelection=true;
 
     //Clases globales
     private Cliente cliente;
     private Pagos pago;
     private Ventas venta;
 
-    //getters and setters
+    //getters and setters Classes
     public Cliente getCliente() {
         return cliente;
     }
@@ -82,7 +83,7 @@ public class MainFrame extends JFrame implements Serializable {
         //Init mainFrame
         setContentPane(mainPanel);
         setTitle("Agentes-GUI");
-        setSize(1000,700);
+        setSize(1000,600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
@@ -90,39 +91,50 @@ public class MainFrame extends JFrame implements Serializable {
         btnIngresarVentas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("\nSales Button pressed");             //se ingresa el numero de ventas que se desee
-//                Ventas venta=new Ventas(contVentas, Integer.parseInt(txtIDCliente.getText()), Double.parseDouble(txtValorVentas.getText()), true, txtFechaVentas.getText(), txtDescripVentas.getText());
-//                boolean rbnSelection=true;
-//                if (rbnNo.isSelected()){
-//                    rbnSelection=false;
-//                }
-                setVenta(new Ventas(1, 1,100,true,"2022-10-10", "Aguacates"));
+                System.out.println("\nSales Button pressed");             //se ingresa el número de ventas que se desee
+                if (rbnNo.isSelected()){
+                    rbnSelection=false;
+                }
+                else {
+                    rbnSelection=true;
+                }
+                setVenta(new Ventas(Integer.parseInt(txtidVentas.getText()), Integer.parseInt(txtClienteVentas.getText()), Double.parseDouble(txtValorVentas.getText()), rbnSelection,
+                        txtFechaVentas.getText(), txtDescripVentas.getText()));
+
                 botonVentas = pressBotonVentas();
+
+//                txtidVentas.setText(null);
+//                txtClienteVentas.setText(null);
+//                txtValorVentas.setText(null);
             }
         });
         btnIngresarPagos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("\nPayment Button pressed");           //se ingresan el numero de pagos que se desee
-                //Pagos pago = new Pagos(contPagos, Integer.parseInt(txtIDCliente.getText()), Double.parseDouble(txtValorPagos.getText()),txtFechaPagos.getText());
-                setPago(new Pagos(1,1,100,"2022-10-10"));
+                System.out.println("\nPayment Button pressed");           //se ingresan el número de pagos que se desee
+                setPago(new Pagos(Integer.parseInt(txtidPagos.getText()), Integer.parseInt(txtClientePagos.getText()),
+                        Double.parseDouble(txtValorPagos.getText()), txtFechaPagos.getText()));
+
                 botonPagos = pressBotonPagos();
+
+//                txtidPagos.setText(txtidPagos.getText()+1);
+//                txtValorPagos.setText(null);
+//                txtFechaPagos.setText(null);
             }
         });
         btnCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("\nClient Button pressed");            //se ingresan los datos del cliente una sola vez
-//                Cliente cliente=new Cliente(txtNombreCliente.getText(),txtApellidoCliente.getText(),txtDireccionCliente.getText(),
-//                        txtTelefonoCliente.getText(),txtEmailCliente.getText(),txtCiudadCliente.getText(),"Ecuador",
-//                        Integer.parseInt(txtIDCliente.getText()),Integer.parseInt(txtEdadCliente.getText()),123,
-//                        Integer.parseInt(txtZipCliente.getText()),Integer.parseInt(txtPlazoCliente.getText()),Double.parseDouble(txtMontoCliente.getText()));
-//                JOptionPane.showMessageDialog(rootPane, "Client Button");
+                setCliente(new Cliente(txtNombreCliente.getText(),txtApellidoCliente.getText(),txtDireccionCliente.getText(),
+                        txtTelefonoCliente.getText(),txtEmailCliente.getText(),txtCiudadCliente.getText(),txtPaisCliente.getText(),
+                        Integer.parseInt(txtIDCliente.getText()),Integer.parseInt(txtEdadCliente.getText()),Integer.parseInt(txtVendedorCliente.getText()),
+                        Integer.parseInt(txtZipCliente.getText()),Integer.parseInt(txtPlazoCliente.getText()),Double.parseDouble(txtMontoCliente.getText())));
 
-                setCliente(new Cliente("Xavier", "Tintin", "Don Bosco", "0999345241",
-                        "xavier.tintin@epn.edu.ec", "Cuenca", "Ecuador", 1, 22, 2, 999,
-                        36, 0));
                 botonCliente = pressBotonCliente();
+
+//                txtClientePagos.setText(txtIDCliente.getText());
+//                txtClienteVentas.setText(txtIDCliente.getText());
             }
         });
         btnCalcular.addActionListener(new ActionListener() {
@@ -130,6 +142,7 @@ public class MainFrame extends JFrame implements Serializable {
             public void actionPerformed(ActionEvent e) {
                 //Set components of the first state to visualize in GUI
                 System.out.println("\nCalculate Button Pressed");         //llama al agente 4 para que se realicen los calculos
+                txaMensaje.setText(null);
                 botonCalcular = pressBotonCalcular();
             }
         });

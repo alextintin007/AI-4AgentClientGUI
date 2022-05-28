@@ -18,7 +18,7 @@ public class Agente4 extends Agent{
 
     class Comportamiento extends Behaviour{
 
-        boolean terminado=true;
+        boolean terminado=false;
         private Cliente m1;
         private PagosVentas m2;
         private Pagos[] pagos;
@@ -27,6 +27,7 @@ public class Agente4 extends Agent{
         double sumVentas=0;
         double monto;
         double montoFinal;
+        private String info;
 
         @Override
         public void action() {
@@ -40,27 +41,35 @@ public class Agente4 extends Agent{
                 ventas = m2.getVentas();
                 //Monto
                 monto=m1.getMonto();
+                sumPagos=0;
+                sumVentas=0;
                 //Pagos
-                for (int i= 0; i<m2.getContPagos(); i++){
+                for (int i = 0; i<m2.getContPagos(); i++){
                     sumPagos+=pagos[i].getValorPago();
                 }
                 //Ventas
-                for (int i= 0; i<m2.getContVentas(); i++){
-                    sumVentas+=ventas[i].getValor();
+                for (int i = 0; i<m2.getContVentas(); i++){
+                    if(ventas[i].isIsIva()){
+                        sumVentas+=(ventas[i].getValor()*1.12);
+                    }
+                    else {
+                        sumVentas+=ventas[i].getValor();
+                    }
                 }
                 //Calcular cupoVenta
                 montoFinal=monto+sumVentas-sumPagos;
-                if(montoFinal<0){
 
+                //Mensaje de salida
+                info=m1.toString()+"\nNumero de Ventas: "+m2.getContVentas()+"\nNumero de Pagos: "+m2.getContPagos();
+                if(montoFinal<0){
+                    t.setTxaMensaje(info+"\nTiene deuda de: "+montoFinal);
                 }
                 else {
-                    t.setTxaMensaje("Monto final: "+montoFinal);
+                    t.setTxaMensaje(info+"\nMonto final: "+montoFinal);
                 }
             } catch (UnreadableException e) {
                 throw new RuntimeException(e);
             }
-
-            //Mensajes.enviar(ACLMessage.INFORM, "BuscarDatos", "Ata", "COD0302", getAgent());
         }
         @Override
         public boolean done() {

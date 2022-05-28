@@ -22,8 +22,8 @@ public class Agente3 extends Agent{
         boolean terminado=false;
 
         PagosVentas pyg = new PagosVentas();
-        Ventas[] ventas = new Ventas[10];
-        Pagos[] pagos = new Pagos[10];
+        Ventas[] ventas = new Ventas[20];
+        Pagos[] pagos = new Pagos[20];
 
         @Override
         public void action() {

@@ -41,10 +41,8 @@ public class Agente2 extends Agent{
                     Logger.getLogger(Agente2.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(check==2){
+            if(check>=2){
                 System.out.println("Enviar al agente 4");
-                System.out.println(m1);
-                System.out.println(m2.toString());
                 Mensajes.enviarS(ACLMessage.INFORM, "EmisorGUI", new Object[] {m1,m2}, "COD0204", getAgent());
             }
         }
