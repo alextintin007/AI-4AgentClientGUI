@@ -42,6 +42,8 @@ public class Agente3 extends Agent{
             }
             if(t.isBotonCalcular()){
                 pyg = new PagosVentas(pagos, ventas);
+                pyg.setContPagos(contPagos);
+                pyg.setContVentas(contVentas);
                 Mensajes.enviarS(ACLMessage.INFORM, "UnirInfo", pyg, "COD0302", getAgent());
                 t.setBotonCalcular(false);
             }

@@ -6,6 +6,8 @@ import java.util.Arrays;
 public class PagosVentas implements Serializable {
     Pagos[] pagos;
     Ventas[] ventas;
+    private int contVentas;
+    private int contPagos;
 
     public PagosVentas(Pagos[] pagos, Ventas[] ventas) {
         this.pagos = pagos;
@@ -38,7 +40,23 @@ public class PagosVentas implements Serializable {
         this.ventas = ventas;
     }
 
-    public void nuevoPago(int posicion,Pagos pago){
+    public int getContVentas() {
+        return contVentas;
+    }
+
+    public void setContVentas(int contVentas) {
+        this.contVentas = contVentas;
+    }
+
+    public int getContPagos() {
+        return contPagos;
+    }
+
+    public void setContPagos(int contPagos) {
+        this.contPagos = contPagos;
+    }
+
+    public void nuevoPago(int posicion, Pagos pago){
         this.pagos[posicion]=pago;
     }
     public void nuevoVentas(int posicion,Ventas venta){

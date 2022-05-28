@@ -82,7 +82,7 @@ public class MainFrame extends JFrame implements Serializable {
         //Init mainFrame
         setContentPane(mainPanel);
         setTitle("Agentes-GUI");
-        setSize(600,700);
+        setSize(1000,700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
@@ -121,7 +121,7 @@ public class MainFrame extends JFrame implements Serializable {
 
                 setCliente(new Cliente("Xavier", "Tintin", "Don Bosco", "0999345241",
                         "xavier.tintin@epn.edu.ec", "Cuenca", "Ecuador", 1, 22, 2, 999,
-                        36, 500));
+                        36, 0));
                 botonCliente = pressBotonCliente();
             }
         });
@@ -177,5 +177,10 @@ public class MainFrame extends JFrame implements Serializable {
     }
     public void setBotonCalcular(boolean botonCalcular){
         this.botonCalcular = botonCalcular;
+    }
+
+    //TextArea Message
+    public void setTxaMensaje(String mensaje){
+        this.txaMensaje.append(mensaje);
     }
 }

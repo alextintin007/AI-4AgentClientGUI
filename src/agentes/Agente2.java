@@ -18,7 +18,6 @@ public class Agente2 extends Agent{
 
     class Comportamiento extends CyclicBehaviour{
         private int check=0;
-        String cont[]= new String[2];
         private Cliente m1;
         private PagosVentas m2;
 
@@ -46,7 +45,7 @@ public class Agente2 extends Agent{
                 System.out.println("Enviar al agente 4");
                 System.out.println(m1);
                 System.out.println(m2.toString());
-                //Mensajes.enviarS(ACLMessage.INFORM, "UnirInfo", new Object[]{m1,m2}, "COD0204", getAgent());
+                Mensajes.enviarS(ACLMessage.INFORM, "EmisorGUI", new Object[] {m1,m2}, "COD0204", getAgent());
             }
         }
     }
